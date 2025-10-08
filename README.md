@@ -1,5 +1,5 @@
 # Product Browser App — KMM
-![App Screenshot](https://user-images.githubusercontent.com/12345678/abcd1234-example.png)
+![App Screenshot](https://github.com/anilkr1997/ProductBrowserApp/blob/main/Screenshot%202025-10-08%20at%201.58.32%E2%80%AFPM.png)
 
 ## Overview / Summary of business requirements
 Revest requires a cross-platform product catalog prototype to evaluate feasibility of a KMM-based mobile product browsing experience. The app demonstrates the following business requirements:
