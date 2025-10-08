@@ -1,4 +1,5 @@
 # Product Browser App — KMM
+![App Screenshot](https://user-images.githubusercontent.com/12345678/abcd1234-example.png)
 
 ## Overview / Summary of business requirements
 Revest requires a cross-platform product catalog prototype to evaluate feasibility of a KMM-based mobile product browsing experience. The app demonstrates the following business requirements:
@@ -77,7 +78,7 @@ Host Compose UI on iOS directly. This is more setup-heavy and not required for t
 Run shared module tests (common JVM tests):
    ```bash
     ./gradlew :shared:test
-
+    
 The tests include:
 
 DTO → domain mapping tests
