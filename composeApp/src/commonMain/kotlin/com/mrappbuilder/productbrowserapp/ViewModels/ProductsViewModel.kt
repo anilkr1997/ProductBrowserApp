@@ -10,8 +10,10 @@ import com.mrappbuilder.productbrowserapp.UseCase.SearchProductsUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
 class ProductsViewModel(
@@ -30,8 +32,8 @@ class ProductsViewModel(
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
-    private val _error = MutableStateFlow<String?>(null)
-    val error: StateFlow<String?> = _error
+    private val _errorFlow = MutableSharedFlow<String>()
+    val errorFlow = _errorFlow.asSharedFlow()
 
     fun load() {
         scope.launch {
@@ -40,9 +42,10 @@ class ProductsViewModel(
             try {
                 _products.value = getProducts()
                 _producetcategery.value = categary()
-
+                _errorFlow.emit("get Successfully")
             } catch (t: Throwable) {
-                _error.value = t.message
+
+                _errorFlow.emit(t.message ?: "Unknown error")
             } finally {
                 _isLoading.value = false
             }
@@ -55,7 +58,7 @@ class ProductsViewModel(
             try {
                 _products.value = searchProducts(q)
             } catch (t: Throwable) {
-                _error.value = t.message
+                _errorFlow.emit(t.message ?: "Unknown error")
             } finally {
                 _isLoading.value = false
             }
@@ -67,7 +70,7 @@ class ProductsViewModel(
             try {
                 _products.value = producetbycategory(q)
             } catch (t: Throwable) {
-                _error.value = t.message
+                _errorFlow.emit(t.message ?: "Unknown error")
             } finally {
                 _isLoading.value = false
             }
